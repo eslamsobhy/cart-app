@@ -29,6 +29,14 @@ const reducer = (state, action) => {
       .filter((item) => item.amount !== 0); //
     return { ...state, cart: cartTemp };
   }
+
+  if (action.type === "GET_TOTAL") {
+    let totalTemp = state.total;
+    state.cart.map((item) => {
+      totalTemp += item.price * item.amount;
+    });
+    return { ...state, total: totalTemp };
+  }
 };
 
 export default reducer;

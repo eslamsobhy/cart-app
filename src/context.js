@@ -32,6 +32,10 @@ const AppProvider = ({ children }) => {
     dispatch({ type: "DECREASE", payload: id });
   };
 
+  const getTotal = () => {
+    dispatch({ type: "GET_TOTAL" });
+  };
+
   return (
     <AppContext.Provider
       value={{
@@ -40,6 +44,7 @@ const AppProvider = ({ children }) => {
         clearItem,
         increase,
         decrease,
+        getTotal,
       }}
     >
       {children}
