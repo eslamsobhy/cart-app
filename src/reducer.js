@@ -19,16 +19,14 @@ const reducer = (state, action) => {
   }
 
   if (action.type === "DECREASE") {
-    const cartTemp = state.cart.map((item) => {
-      if (item.id === action.payload) {
-        if (item.amount > 0) {
+    const cartTemp = state.cart
+      .map((item) => {
+        if (item.id === action.payload) {
           return { ...item, amount: item.amount - 1 };
-        } else {
-          return item;
         }
-      }
-      return item;
-    });
+        return item;
+      })
+      .filter((item) => item.amount !== 0); //
     return { ...state, cart: cartTemp };
   }
 };
