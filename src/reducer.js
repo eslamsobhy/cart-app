@@ -21,7 +21,11 @@ const reducer = (state, action) => {
   if (action.type === "DECREASE") {
     const cartTemp = state.cart.map((item) => {
       if (item.id === action.payload) {
-        return { ...item, amount: item.amount - 1 };
+        if (item.amount > 0) {
+          return { ...item, amount: item.amount - 1 };
+        } else {
+          return item;
+        }
       }
       return item;
     });
