@@ -31,11 +31,18 @@ const reducer = (state, action) => {
   }
 
   if (action.type === "GET_TOTAL") {
-    let totalTemp = state.total;
-    state.cart.map((item) => {
-      totalTemp += item.price * item.amount;
-    });
-    return { ...state, total: totalTemp };
+    const { total, amount } = state.cart.reduce(
+      (cartTotal, cartItem) => {
+        cartTotal.amount += cartItem.amount;
+        return cartTotal;
+      },
+      {
+        total: 0,
+        amount: 0,
+      }
+    );
+
+    return { ...state, amount, total };
   }
 };
 
