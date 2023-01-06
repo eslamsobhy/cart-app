@@ -8,6 +8,7 @@ const reducer = (state, action) => {
     return { ...state, cart: newCart };
   }
 
+  /*
   if (action.type === "INCREASE") {
     const tempCart = state.cart.map((item) => {
       if (item.id === action.payload) {
@@ -17,7 +18,9 @@ const reducer = (state, action) => {
     });
     return { ...state, cart: tempCart };
   }
+  */
 
+  /*
   if (action.type === "DECREASE") {
     const cartTemp = state.cart
       .map((item) => {
@@ -29,6 +32,7 @@ const reducer = (state, action) => {
       .filter((item) => item.amount !== 0); //
     return { ...state, cart: cartTemp };
   }
+  */
 
   if (action.type === "GET_TOTAL") {
     let { total, amount } = state.cart.reduce(
@@ -59,6 +63,30 @@ const reducer = (state, action) => {
 
   if (action.type === "DISPLAY_ITEMS") {
     return { ...state, cart: action.payload, loading: false };
+  }
+
+  if (action.type === "TOGGLE_AMOUNT") {
+    let newCart = [];
+    if (action.payload.type === "inc") {
+      newCart = state.cart.map((cartItem) => {
+        if (action.payload.id === cartItem.id) {
+          return { ...cartItem, amount: cartItem.amount + 1 };
+        }
+        return cartItem;
+      });
+    }
+    if (action.payload.type === "dec") {
+      newCart = state.cart
+        .map((cartItem) => {
+          if (action.payload.id === cartItem.id) {
+            return { ...cartItem, amount: cartItem.amount - 1 };
+          }
+          return cartItem;
+        })
+        .filter((cartItem) => cartItem.amount !== 0);
+    }
+
+    return { ...state, cart: newCart };
   }
 };
 
