@@ -88,6 +88,7 @@ const reducer = (state, action) => {
 
     return { ...state, cart: newCart };
   }
+  throw new Error("NO MATCHING ACTION TYPE!");
 };
 
 export default reducer;
